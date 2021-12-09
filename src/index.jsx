@@ -1,3 +1,11 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import * as Redux from "redux";
+import * as ReactRedux from "react-redux";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+// import App from "./App";
+// import reportWebVitals from "./reportWebVitals";
 /**
  * *****************************************************************************
  * CONSTANTS
@@ -133,7 +141,7 @@ class QuoteCard extends React.Component {
                                 href={this.state.tweetUrl}
                                 target="_top"
                             >
-                                <i class="fab fa-twitter "></i>
+                                <i className="fab fa-twitter "></i>
                             </a>
                         </div>
                         <div className="col-6 text-end">
@@ -161,7 +169,7 @@ class QuoteContainer extends React.Component {
     }
     render() {
         return (
-            <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+            <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
                 <QuoteCard
                     quote={this.props.quote}
                     addNewQuote={this.props.addNewQuote}
@@ -196,4 +204,4 @@ class AppWrapper extends React.Component {
  * RENDER
  * *****************************************************************************
  */
-ReactDOM.render(<AppWrapper />, document.getElementById("app"));
+ReactDOM.render(<AppWrapper />, document.getElementById("root"));
