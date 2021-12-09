@@ -1,4 +1,4 @@
-# Random Quote Machine
+# Random quote Machine React Front-End
 
 Proyecto para el certificado de "Front End Development Libraries Projects" de
 FreeCodeCamp.
