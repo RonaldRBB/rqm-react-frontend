@@ -8,6 +8,7 @@
  * -----------------------------------------------------------------------------
  */
 import React from "react";
+import config from "../config/config";
 import { loadingIcon, saveIcon } from "../utils/constants";
 /**
  * Quote Card
@@ -21,6 +22,7 @@ export default class QuoteCard extends React.Component {
             tweetUrl: "",
         };
         this.addNewQuote = this.addNewQuote.bind(this);
+        this.tweetQuote = this.tweetQuote.bind(this);
     }
     /**
      * Add Quote at the Beginning
@@ -44,7 +46,7 @@ export default class QuoteCard extends React.Component {
      * -------------------------------------------------------------------------
      */
     async getQuote() {
-        const response = await fetch("http://localhost:8082/random");
+        const response = await fetch(config.backendUrl);
         const data = await response.json();
         return { text: data.text, author: data.author };
     }
@@ -70,12 +72,21 @@ export default class QuoteCard extends React.Component {
         var newQuoteIcon = document.getElementById("new-quote-icon");
         newQuoteIcon.innerHTML = saveIcon;
     }
+    /**
+     * Create Tweet Url
+     * -------------------------------------------------------------------------
+     */
     createTweetUrl() {
         this.setState({
             tweetUrl:
                 "https://twitter.com/intent/tweet?text=" +
-                `${this.props.quote.text} - ${this.props.quote.author}`,
+                encodeURIComponent(
+                    `${this.props.quote.text} - ${this.props.quote.author}`
+                ),
         });
+    }
+    tweetQuote() {
+        window.open(this.state.tweetUrl, "_blank");
     }
     /**
      * Render
@@ -98,24 +109,23 @@ export default class QuoteCard extends React.Component {
                 <div className="card-footer">
                     <div className="row">
                         <div className="col-6  text-start">
-                            <a
+                            <button
                                 className="btn btn-primary"
                                 id="tweet-quote"
-                                href={this.state.tweetUrl}
-                                target="_top"
+                                onClick={this.tweetQuote}
                             >
-                                <i className="fab fa-twitter "></i>
-                            </a>
+                                <i className="fab fa-twitter"></i>
+                            </button>
                         </div>
                         <div className="col-6 text-end">
-                            <a
+                            <button
                                 className="btn btn-primary"
                                 id="new-quote"
                                 onClick={this.addNewQuote}
                             >
                                 <span id="new-quote-icon"></span>{" "}
                                 {this.state.button.title}
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

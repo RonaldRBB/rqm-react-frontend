@@ -4,6 +4,11 @@
  * =============================================================================
  */
 /**
+ * Environment
+ * -----------------------------------------------------------------------------
+ */
+import dotenv from "dotenv";
+/**
  * Modules
  * -----------------------------------------------------------------------------
  */
@@ -14,12 +19,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-free/js/all.min.js";
-
 /**
- * =============================================================================
- * RENDER
- * =============================================================================
+ * Activate Environment
+ * -----------------------------------------------------------------------------
  */
-setTimeout(() => {
-    ReactDOM.render(<AppWrapper />, document.getElementById("root"));
-}, 5000);
+dotenv.config();
+/**
+ * Render
+ * -----------------------------------------------------------------------------
+ */
+ReactDOM.render(<AppWrapper />, document.getElementById("root"));
