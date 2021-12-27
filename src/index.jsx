@@ -4,12 +4,7 @@
  * =============================================================================
  */
 /**
- * Environment
- * -----------------------------------------------------------------------------
- */
-import dotenv from "dotenv";
-/**
- * Modules
+ * Módulos
  * -----------------------------------------------------------------------------
  */
 import React from "react";
@@ -20,12 +15,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-free/js/all.min.js";
 /**
- * Activate Environment
- * -----------------------------------------------------------------------------
- */
-dotenv.config();
-/**
- * Render
+ * Renderizar
  * -----------------------------------------------------------------------------
  */
 ReactDOM.render(<AppWrapper />, document.getElementById("root"));
