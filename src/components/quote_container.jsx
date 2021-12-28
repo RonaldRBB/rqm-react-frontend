@@ -10,7 +10,6 @@
 import React from "react";
 import QuoteCard from "./quote_card";
 import config from "../config/config";
-// import { loadingIcon, saveIcon } from "../utils/constants";
 /**
  * Quote Container
  * -----------------------------------------------------------------------------
@@ -18,12 +17,15 @@ import config from "../config/config";
 export default class QuoteContainer extends React.Component {
     constructor(props) {
         super(props);
+        this.state = { loading: false };
         this.addNewQuote = this.addNewQuote.bind(this);
         this.tweetQuote = this.tweetQuote.bind(this);
     }
     /**
      * Add Quote at the Beginning
      * -------------------------------------------------------------------------
+     *
+     * @returns {void}
      */
     componentDidMount() {
         this.addNewQuote();
@@ -31,12 +33,25 @@ export default class QuoteContainer extends React.Component {
     /**
      * Add Quote When Button is Pressed
      * -------------------------------------------------------------------------
+     *
+     * @returns {void}
      */
     async addNewQuote() {
+        this.changeLoadingState(true);
         this.props.addNewQuote(await this.getQuote());
         this.createTweetUrl();
+        this.changeLoadingState(false);
     }
-
+    /**
+     * Change Loading State
+     * -------------------------------------------------------------------------
+     *
+     * @param {boolean} loadingState Loading State
+     * @return {void}
+     */
+    changeLoadingState(loadingState) {
+        this.setState({ loading: loadingState });
+    }
     /**
      * Gets Quote From Api
      * -------------------------------------------------------------------------
@@ -51,6 +66,8 @@ export default class QuoteContainer extends React.Component {
     /**
      * Tweet Quote
      * -------------------------------------------------------------------------
+     *
+     * @returns {void}
      */
     tweetQuote() {
         window.open(this.createTweetUrl(), "_blank");
@@ -58,6 +75,8 @@ export default class QuoteContainer extends React.Component {
     /**
      * Create Tweet Url
      * -------------------------------------------------------------------------
+     *
+     * @returns {string} Tweet Url
      */
     createTweetUrl() {
         return (
@@ -76,11 +95,15 @@ export default class QuoteContainer extends React.Component {
      */
     render() {
         return (
-            <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+            <div
+                className="d-flex flex-column min-vh-100 justify-content-center align-items-center"
+                id="quote-container"
+            >
                 <QuoteCard
                     quote={this.props.quote}
                     addNewQuote={this.addNewQuote}
                     tweetQuote={this.tweetQuote}
+                    loadingState={this.state.loading}
                 />
             </div>
         );

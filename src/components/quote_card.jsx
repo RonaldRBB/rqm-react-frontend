@@ -8,6 +8,7 @@
  * -----------------------------------------------------------------------------
  */
 import React from "react";
+import { LoadingIcon, RedoIcon } from "./icons";
 /**
  * Quote Card
  * -----------------------------------------------------------------------------
@@ -16,13 +17,17 @@ export default class QuoteCard extends React.Component {
     /**
      * Render
      * -------------------------------------------------------------------------
+     *
+     * @returns {React.Component} React Component
      */
     render() {
         return (
-            <div className="card" id="quote-box" style={{ width: "50vw" }}>
+            <div className="card w-50 shadow rounded-3" id="quote-box">
                 {/* Card Body */}
                 <div className="card-body">
-                    <h1 className="card-title">"</h1>
+                    <div className="card-title text-primary">
+                        <i className="fas fa-quote-left fa-2x"></i>
+                    </div>
                     <p className="card-text" id="text">
                         {this.props.quote.text}
                     </p>
@@ -48,8 +53,11 @@ export default class QuoteCard extends React.Component {
                                 id="new-quote"
                                 onClick={this.props.addNewQuote}
                             >
-                                <span id="new-quote-icon"></span>{" "}
-                                {/* {this.state.button.title} */}
+                                {this.props.loadingState ? (
+                                    <LoadingIcon />
+                                ) : (
+                                    <RedoIcon />
+                                )}{" "}
                                 New Quote
                             </button>
                         </div>
